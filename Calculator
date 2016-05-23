@@ -1,0 +1,207 @@
+package calculator;
+
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JApplet;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+
+
+public class Calculator extends JApplet{
+
+	private JTextField textField;
+	private Calculation calc;
+	private String buttonInput = "";
+
+	public void init() {
+		MyAction myAction = new MyAction();
+
+		setLayout(new BorderLayout());
+
+		textField = new JTextField();
+		textField.setFont(new Font("SERIF", Font.BOLD, 32));
+		textField.setEditable(false);
+		textField.setBackground(Color.YELLOW);
+		add(textField, BorderLayout.NORTH);
+
+		JPanel buttonPanel = new JPanel();
+		buttonPanel.setLayout(new GridLayout(4,4,4,4));
+		buttonPanel.setBackground(Color.LIGHT_GRAY);
+		add(buttonPanel, BorderLayout.CENTER);
+
+		JButton b1 = new JButton("1");
+		b1.setBackground(Color.CYAN);
+		b1.setFont(new Font("SERIF", Font.BOLD, 32));
+		b1.addActionListener(myAction);
+		buttonPanel.add(b1);
+
+		JButton b2 = new JButton("2");
+		b2.setBackground(Color.CYAN);
+		b2.setFont(new Font("SERIF", Font.BOLD, 32));
+		b2.addActionListener(myAction);
+		buttonPanel.add(b2);
+
+		JButton b3 = new JButton("3");
+		b3.setBackground(Color.CYAN);
+		b3.setFont(new Font("SERIF", Font.BOLD, 32));
+		b3.addActionListener(myAction);
+		buttonPanel.add(b3);
+
+		JButton b4 = new JButton("4");
+		b4.setBackground(Color.CYAN);
+		b4.setFont(new Font("SERIF", Font.BOLD, 32));
+		b4.addActionListener(myAction);
+		buttonPanel.add(b4);
+
+		JButton b5 = new JButton("5");
+		b5.setBackground(Color.CYAN);
+		b5.setFont(new Font("SERIF", Font.BOLD, 32));
+		b5.addActionListener(myAction);
+		buttonPanel.add(b5);
+
+		JButton b6 = new JButton("6");
+		b6.setBackground(Color.CYAN);
+		b6.setFont(new Font("SERIF", Font.BOLD, 32));
+		b6.addActionListener(myAction);
+		buttonPanel.add(b6);
+
+		JButton b7 = new JButton("7");
+		b7.setBackground(Color.CYAN);
+		b7.setFont(new Font("SERIF", Font.BOLD, 32));
+		b7.addActionListener(myAction);
+		buttonPanel.add(b7);
+
+		JButton b8 = new JButton("8");
+		b8.setBackground(Color.CYAN);
+		b8.setFont(new Font("SERIF", Font.BOLD, 32));
+		b8.addActionListener(myAction);
+		buttonPanel.add(b8);
+
+		JButton b9 = new JButton("9");
+		b9.setBackground(Color.CYAN);
+		b9.setFont(new Font("SERIF", Font.BOLD, 32));
+		b9.addActionListener(myAction);
+		buttonPanel.add(b9);
+
+		JButton b0 = new JButton("0");
+		b0.setBackground(Color.CYAN);
+		b0.setFont(new Font("SERIF", Font.BOLD, 32));
+		b0.addActionListener(myAction);
+		buttonPanel.add(b0);
+
+		JButton badd = new JButton("+");
+		badd.setBackground(Color.RED);
+		badd.setFont(new Font("SERIF", Font.BOLD, 32));
+		badd.addActionListener(myAction);
+		buttonPanel.add(badd);
+
+		JButton bsub = new JButton("-");
+		bsub.setBackground(Color.RED);
+		bsub.setFont(new Font("SERIF", Font.BOLD, 32));
+		bsub.addActionListener(myAction);
+		buttonPanel.add(bsub);
+
+		JButton bmult = new JButton("*");
+		bmult.setBackground(Color.RED);
+		bmult.setFont(new Font("SERIF", Font.BOLD, 32));
+		bmult.addActionListener(myAction);
+		buttonPanel.add(bmult);
+
+		JButton bdiv = new JButton("/");
+		bdiv.setBackground(Color.RED);
+		bdiv.setFont(new Font("SERIF", Font.BOLD, 32));
+		bdiv.addActionListener(myAction);
+		buttonPanel.add(bdiv);
+
+		JButton bequal = new JButton("=");
+		bequal.setBackground(Color.RED);
+		bequal.setFont(new Font("SERIF", Font.BOLD, 32));
+		bequal.addActionListener(myAction);
+		buttonPanel.add(bequal);
+
+		JButton bclear = new JButton("clear");
+		bclear.setBackground(Color.RED);
+		bclear.setFont(new Font("SERIF", Font.BOLD, 32));
+		bclear.addActionListener(myAction);
+		buttonPanel.add(bclear);
+
+		setVisible(true);
+	}
+
+
+	//***** Inner Class *****
+	class MyAction implements ActionListener{
+
+		String operand1 = "";
+		String operand2 = "";
+		String operator = "";
+		String results = "";
+
+		public void actionPerformed(ActionEvent e)
+		{
+			buttonInput = e.getActionCommand();
+			switch(buttonInput){
+			case "+": { operator = "+";
+			operand1 = textField.getText();
+			textField.setText("");
+			break;
+			}
+			case "-": { operator = "-";
+			operand1 = textField.getText();
+			textField.setText("");
+			break;
+			}
+			case "*": { operator = "*";
+			operand1 = textField.getText();
+			textField.setText("");
+			break;
+			}
+			case "/": { operator = "/";
+			operand1 = textField.getText();
+			textField.setText("");
+			break;
+			}
+			case "=": { operand2 = textField.getText();
+			textField.setText("");
+			calc = new Calculation();
+			results = String.valueOf(calc.calculate(operator, operand1, operand2));
+			textField.setText(results);
+			break;
+			}
+			case "clear": { operator = "";
+			operand1 = "";
+			operand2 = "";
+			results = "";
+			textField.setText("");
+			break;
+			}
+			default: { textField.setText(textField.getText() + buttonInput);
+			break;
+			}
+			}
+
+
+		}
+	}
+
+	//***** End Inner Class *****
+
+	public static void main(String[] args){
+
+		Calculator cal = new Calculator();
+		JFrame calcFrame = new JFrame("Calculator");
+		calcFrame.add(cal);
+		calcFrame.setSize(500,400);
+		cal.init();
+
+		calcFrame.setVisible(true);
+
+	}
+}
