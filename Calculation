@@ -1,0 +1,30 @@
+package calculator;
+
+public class Calculation {
+	
+	int results;
+	
+	public int calculate(String operator, String operand1, String operand2)
+	{
+		
+		switch(operator){
+		case "+": { results = Integer.parseInt(operand1) + Integer.parseInt(operand2);
+			break;
+		}
+		case "-": { results = Integer.parseInt(operand1) - Integer.parseInt(operand2);
+			break;
+		}
+		case "*": { results = Integer.parseInt(operand1) * Integer.parseInt(operand2);
+			break;
+		}
+		case "/": { results = Integer.parseInt(operand1) / Integer.parseInt(operand2);
+			break;
+		}	
+		default: break;
+		}
+		
+		return results;
+
+	}
+
+}
